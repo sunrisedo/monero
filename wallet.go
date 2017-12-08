@@ -1,7 +1,5 @@
 package monero
 
-// con "github.com/Soontao/goHttpDigestClient"
-
 type WalletClient struct {
 	*CallClient
 }
