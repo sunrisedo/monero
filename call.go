@@ -161,6 +161,6 @@ func DecodeClientResponse(r io.Reader, reply interface{}) error {
 	if c.Result == nil {
 		return ErrNullResult
 	}
-	log.Println("read body Result:", string(*c.Result))
+	// log.Println("read body Result:", string(*c.Result))
 	return json.Unmarshal(*c.Result, reply)
 }

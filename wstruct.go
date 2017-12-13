@@ -96,10 +96,6 @@ type Entries struct {
 }
 
 /***************************************/
-
-type Payments struct {
-	Payments []Payment `json:"payments"`
-}
 type Payment struct {
 	Amount      uint64 `json:"amount"`
 	BlockHeight uint64 `json:"block_height"`

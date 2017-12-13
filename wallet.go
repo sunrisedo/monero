@@ -149,19 +149,21 @@ func (c *WalletClient) DeleteAddressBook(index uint) error {
 	return nil
 }
 
-func (c *WalletClient) GetPayments(paymentId string) (Payments, error) {
+func (c *WalletClient) GetPayments(paymentId string) ([]Payment, error) {
 	req := struct {
 		PaymentId string `json:"payment_id,omitempty"`
 	}{
 		paymentId,
 	}
-	var rep Payments
+	rep := struct {
+		Payments []Payment `json:"payments"`
+	}{}
 	if err := c.Wallet("get_payments", req, &rep); err != nil {
-		return rep, err
+		return rep.Payments, err
 	}
-	return rep, nil
+	return rep.Payments, nil
 }
-func (c *WalletClient) GetBulkPayments(paymentIds []string, minBlockHeight uint64) (Payments, error) {
+func (c *WalletClient) GetBulkPayments(paymentIds []string, minBlockHeight uint64) ([]Payment, error) {
 	req := struct {
 		PaymentIds     []string `json:"payment_ids,omitempty"`
 		MinBlockHeight uint64   `json:"min_block_height,omitempty"`
@@ -169,11 +171,13 @@ func (c *WalletClient) GetBulkPayments(paymentIds []string, minBlockHeight uint6
 		paymentIds,
 		minBlockHeight,
 	}
-	var rep Payments
+	rep := struct {
+		Payments []Payment `json:"payments"`
+	}{}
 	if err := c.Wallet("get_bulk_payments", req, &rep); err != nil {
-		return rep, err
+		return rep.Payments, err
 	}
-	return rep, nil
+	return rep.Payments, nil
 }
 
 func (c *WalletClient) Store() (bool, error) {
