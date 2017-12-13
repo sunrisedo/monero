@@ -45,7 +45,7 @@ type BlockTemplate struct {
 // reward - unsigned int; The amount of new atomic units generated in this block and rewarded to the miner. Note: 1 XMR = 1e12 atomic units.
 // timestamp - unsigned int; The time the block was recorded into the blockchain.
 type BlockHeader struct {
-	Depth        uint   `json:"depth"`
+	Depth        uint64 `json:"depth"`
 	Difficulty   uint   `json:"difficulty"`
 	Hash         string `json:"hash"`
 	Height       uint   `json:"height"`

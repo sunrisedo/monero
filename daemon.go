@@ -78,9 +78,14 @@ func (c *DaemonClient) GetBlockHeaderByHash(hash string) (BlockHeaderResponse, e
 }
 
 // Similar to GetBlockHeaderByHash above, this method includes a block's height as an input parameter to retrieve basic information about the block.
-func (c *DaemonClient) GetBlockHeaderByHeight(height uint) (BlockHeaderResponse, error) {
+func (c *DaemonClient) GetBlockHeaderByHeight(height uint64) (BlockHeaderResponse, error) {
+	req := struct {
+		Height uint64 `json:"height"`
+	}{
+		height,
+	}
 	var bhr BlockHeaderResponse
-	if err := c.Daemon("getblockheaderbyheight", height, &bhr); err != nil {
+	if err := c.Daemon("getblockheaderbyheight", req, &bhr); err != nil {
 		return bhr, err
 	}
 	return bhr, nil
